@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>{{ title }} - microblog</title>
+	</head>
+
+	<body>
+		<h1>Hello, {{ user.nickname }}!</h1>
+		<ul>
+			<li> {{ this }} </li>
+			<li> {{ iss }} </li>
+			<li> {{ cool }} </li>
+		</ul>
+
+		{% for name in nameList %}
+		<div style="background-color: silver">
+			<p> {{name}} </p>
+		</div>
+		{% endfor%}
+
+	</body>
+</html>
