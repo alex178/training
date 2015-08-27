@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action="" method="post" name="login" >
+        {{ form.hidden_tag() }}
+        Bitte gib deine OpenID ein!<br>
+        {{ form.openID }}
+        {% for error in form.openID.errors %}
+            {{ error }}
+        {% endfor %}
+        <br>
+        merken: {{ form.rememberMe }}
+
+        <input type="submit" value="OK">
+
+    </form>
+{% endblock %}
