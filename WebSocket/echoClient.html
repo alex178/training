@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Websocket-Client</title>
+
+	<script type="text/javascript">
+
+		//Zuerst wird ueberprueft, ob der Browser Websocket unterstuetzt
+		if ("WebSocket" in window){
+			var myWebsocket = new WebSocket("ws://127.0.0.1:8888/ws");
+
+			//wird aufgerufen nach einem erfolgreichen Verbindungsaufbau
+			myWebsocket.onopen = function () {
+	  			myWebsocket.send("Hello Server");
+			}
+
+			// wird aufgerufen, wenn Server Daten schickt
+			myWebsocket.onmessage = function (event) {
+				document.getElementById("echoText").innerHTML = event.data;
+				//alert(event.data);
+			}
+
+			//wird aufgerufen, wenn Verbindung geschlossen werden soll
+			myWebsocket.onclose = function() { 
+				alert("Client beendet Verbindung");
+	 		}
+
+			// Fehlermeldung
+			myWebsocket.onerror = function (error) {
+				alert("Ein Fehler ist aufgetretten " + error)
+			}
+
+		}else{
+			alert("Dein Webbrowser unterstützt kein Websocket");
+		}
+
+
+	</script>
+</head>
+
+<body>
+	<h2 style="background-color: yellow;">im Client: Webbrowser</h2>
+	<div id="echoText" style="background-color: #81F79F; margin:5px;">
+	</div>
+
+	<div id="button">
+		<input type="text" id="text" size ="30" >
+		<input type="button" value="absenden" onClick="myWebsocket.send(document.getElementById('text').value)"><br>
+		<input type="button"  value="schick was" onClick="myWebsocket.send('Websockets sind cool')">
+		<input type="button" value="close" onClick="myWebsocket.close()">
+	</div>
+
+</body>
+</html>
